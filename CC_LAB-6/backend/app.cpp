@@ -11,7 +11,10 @@ int main() {
     int opt = 1;
     int addrlen = sizeof(address);
 
-    const char* response =
+    char hostname[64];
+    gethostname(hostname, sizeof(hostname));
+
+    std::string response =
         "HTTP/1.1 200 OK\r\n"
         "Content-Type: text/html\r\n"
         "Connection: close\r\n"
@@ -20,6 +23,7 @@ int main() {
         "<h1>Hello from C++ Backend!</h1>"
         "<p>CI/CD Pipeline with Jenkins and NGINX</p>"
         "<p>Student: PES1UG23CS385</p>"
+        "<p>Served by backend: " + std::string(hostname) + "</p>"
         "</body></html>";
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -36,7 +40,7 @@ int main() {
 
     while (true) {
         new_socket = accept(server_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
-        send(new_socket, response, strlen(response), 0);
+        send(new_socket, response.c_str(), response.size(), 0);
         close(new_socket);
     }
 
