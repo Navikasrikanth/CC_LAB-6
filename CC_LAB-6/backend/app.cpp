@@ -19,7 +19,7 @@ int main() {
         "<html><body>"
         "<h1>Hello from C++ Backend!</h1>"
         "<p>CI/CD Pipeline with Jenkins and NGINX</p>"
-        "<p>Student: PES1UG23CS393</p>"
+        "<p>Student: PES1UG23CS385</p>"
         "</body></html>";
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
